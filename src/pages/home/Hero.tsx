@@ -7,8 +7,6 @@ import { SectionKeys } from "@/utils/constants/section-keys";
 
 import { TextEffect } from "@/components/TextEffect";
 
-gsap.registerPlugin(ScrollTrigger);
-
 export const Hero = () => {
   const [time, setTime] = useState(
     new Intl.DateTimeFormat("en-ID", {
@@ -36,25 +34,34 @@ export const Hero = () => {
   }, []);
 
   useEffect(() => {
+    function infiniteReverse(this: GSAPTween) {
+      this.totalTime(this.rawTime() + this.duration() + this.repeatDelay());
+    }
+
     const tween = gsap.to(".scroller__inner", {
       xPercent: -50,
       x: -175,
       duration: 15,
       repeat: -1,
       ease: "linear",
+      onReverseComplete: infiniteReverse,
     });
 
-    ScrollTrigger.create({
+    const scrollTrigger = ScrollTrigger.create({
       id: SectionKeys.HOME_HERO,
       trigger: "#" + SectionKeys.HOME_HERO,
       start: "top top",
       end: "bottom top",
       onUpdate: self => {
         tween.timeScale(self.direction === 1 ? 1 : -1);
+        console.log("self", self);
       },
     });
 
-    return () => ScrollTrigger.killAll();
+    return () => {
+      tween.kill();
+      scrollTrigger.kill();
+    };
   }, []);
 
   return (
@@ -124,27 +131,36 @@ export const Hero = () => {
         />
       </Stack>
       <Box component="header" zIndex={1}>
-        <Box maxWidth="100%" className="scroller" overflow="hidden">
-          <Stack
-            flexDirection="row"
-            gap="35rem"
-            width="max-content"
-            className="scroller__inner"
-          >
-            {[...Array(2)].map((_, idx) => (
-              <Typography
-                key={idx}
-                aria-hidden={idx !== 0 ? "true" : "false"}
-                variant="h1"
-                textTransform="uppercase"
-                color="common.white"
-                whiteSpace="nowrap"
-              >
-                Jiwo Kristi
-              </Typography>
-            ))}
-          </Stack>
-        </Box>
+        <Stack
+          flexDirection="row"
+          gap="35rem"
+          maxWidth="100%"
+          className="scroller"
+          overflow="hidden"
+        >
+          {[...Array(2)].map((_, i) => (
+            <Stack
+              key={i}
+              aria-hidden={i !== 0 ? "true" : "false"}
+              flexDirection="row"
+              gap="35rem"
+              width="max-content"
+              className="scroller__inner"
+            >
+              {[...Array(2)].map((_, idx) => (
+                <Typography
+                  key={idx}
+                  variant="h1"
+                  textTransform="uppercase"
+                  color="common.white"
+                  whiteSpace="nowrap"
+                >
+                  Jiwo Kristi
+                </Typography>
+              ))}
+            </Stack>
+          ))}
+        </Stack>
       </Box>
     </Stack>
   );

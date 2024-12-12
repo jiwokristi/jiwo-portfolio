@@ -1,52 +1,39 @@
 import { useEffect } from "react";
 import { Stack, Typography } from "@mui/material";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Lenis from "lenis";
 import Splitting from "splitting";
 
 import { SectionKeys } from "@/utils/constants/section-keys";
-import { TextEffect } from "@/components/TextEffect";
 
-gsap.registerPlugin(ScrollTrigger);
+import { TextEffect } from "@/components/TextEffect";
 
 export const Intro = () => {
   useEffect(() => {
-    const lenis = new Lenis({
-      lerp: 0.05,
-      smoothWheel: true,
-    });
-
-    lenis.on("scroll", ScrollTrigger.update);
-
-    gsap.ticker.add(time => lenis.raf(time * 1000));
-    gsap.ticker.lagSmoothing(0);
-
     Splitting({ target: "#Home-Intro-paragraph", by: "chars" });
 
-    const initScroll = () => {
-      const charElements = document.querySelectorAll(
-        "#Home-Intro-paragraph .char",
+    const charElements = document.querySelectorAll(
+      "#Home-Intro-paragraph .char",
+    );
+
+    const tl = gsap
+      .timeline({
+        scrollTrigger: {
+          id: SectionKeys.HOME_INTRO,
+          trigger: "#" + SectionKeys.HOME_INTRO,
+          start: "top 50%",
+          end: "bottom bottom",
+          scrub: 1,
+        },
+      })
+      .fromTo(
+        charElements,
+        { autoAlpha: 0.4 },
+        { autoAlpha: 1, stagger: 0.05, duration: 2 },
       );
 
-      gsap
-        .timeline({
-          scrollTrigger: {
-            id: SectionKeys.HOME_INTRO,
-            trigger: "#" + SectionKeys.HOME_INTRO,
-            start: "top 50%",
-            end: "bottom bottom",
-            scrub: 1,
-          },
-        })
-        .fromTo(
-          charElements,
-          { autoAlpha: 0.4 },
-          { autoAlpha: 1, stagger: 0.05, duration: 2 },
-        );
+    return () => {
+      tl.kill();
     };
-
-    initScroll();
   }, []);
 
   return (

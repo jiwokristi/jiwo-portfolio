@@ -3,13 +3,10 @@ import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router-dom";
 import { Box, Stack, Typography } from "@mui/material";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { Locales } from "@/utils/localization/i18n";
 
 import { TextEffect } from "@/components/TextEffect";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const Navbar = () => {
   const { i18n } = useTranslation();

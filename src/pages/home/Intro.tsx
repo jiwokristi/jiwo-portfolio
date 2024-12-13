@@ -12,7 +12,7 @@ import { TextEffect } from "@/components/TextEffect";
 export const Intro = () => {
   const { t, i18n } = useTranslation();
 
-  const paragraphRef = useRef<HTMLDivElement | null>(null);
+  const paragraphRef = useRef<HTMLParagraphElement | null>(null);
   const [paragraph, setParagraph] = useState<HTMLParagraphElement>();
 
   useEffect(() => {

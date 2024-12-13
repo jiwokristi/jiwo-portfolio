@@ -2,8 +2,9 @@ import { ReactNode, useEffect } from "react";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/all";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 export const LenisGSAPProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {

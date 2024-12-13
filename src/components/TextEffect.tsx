@@ -20,6 +20,7 @@ export const TextEffect = ({
         {...props}
         position="relative"
         sx={{
+          width: "fit-content",
           transition: "all 0.2s ease-in-out",
 
           "::before": {

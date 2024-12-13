@@ -1,35 +1,44 @@
-import { useEffect } from "react";
-import { Stack, Typography } from "@mui/material";
+import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Box, Stack } from "@mui/material";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Lenis from "lenis";
 import Splitting from "splitting";
 
 import { SectionKeys } from "@/utils/constants/section-keys";
+
 import { TextEffect } from "@/components/TextEffect";
 
-gsap.registerPlugin(ScrollTrigger);
-
 export const Intro = () => {
+  const { t, i18n } = useTranslation();
+
+  const paragraphRef = useRef<HTMLDivElement | null>(null);
+  const [paragraph, setParagraph] = useState<HTMLParagraphElement>();
+
   useEffect(() => {
-    const lenis = new Lenis({
-      lerp: 0.05,
-      smoothWheel: true,
+    const paragraphEl = document.createElement("p");
+    paragraphEl.id = "Home-Intro-paragraph";
+    paragraphEl.style.fontFamily = "Poppins, sans-serif";
+    paragraphEl.style.fontWeight = "500";
+    paragraphEl.style.lineHeight = "1.2";
+    paragraphEl.style.fontSize = "6.4rem";
+    paragraphEl.innerHTML = t("HOME.intro.paragraph");
+
+    Splitting({
+      target: paragraphEl,
+      by: "chars",
     });
 
-    lenis.on("scroll", ScrollTrigger.update);
+    setParagraph(paragraphEl);
+  }, [i18n.language, t]);
 
-    gsap.ticker.add(time => lenis.raf(time * 1000));
-    gsap.ticker.lagSmoothing(0);
+  useEffect(() => {
+    if (paragraph && paragraphRef.current) {
+      paragraphRef.current.innerHTML = "";
+      paragraphRef.current.appendChild(paragraph);
 
-    Splitting({ target: "#Home-Intro-paragraph", by: "chars" });
+      const charElements = paragraph.querySelectorAll(".char");
 
-    const initScroll = () => {
-      const charElements = document.querySelectorAll(
-        "#Home-Intro-paragraph .char",
-      );
-
-      gsap
+      const tl = gsap
         .timeline({
           scrollTrigger: {
             id: SectionKeys.HOME_INTRO,
@@ -44,10 +53,12 @@ export const Intro = () => {
           { autoAlpha: 0.4 },
           { autoAlpha: 1, stagger: 0.05, duration: 2 },
         );
-    };
 
-    initScroll();
-  }, []);
+      return () => {
+        tl.kill();
+      };
+    }
+  }, [paragraph]);
 
   return (
     <Stack
@@ -63,20 +74,7 @@ export const Intro = () => {
         textContent="Intro"
         containerProps={{ component: "header" }}
       />
-      <Typography
-        id="Home-Intro-paragraph"
-        component="p"
-        variant="h2"
-        width="75%"
-      >
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque,
-        repellendus sint maiores necessitatibus suscipit consectetur omnis
-        aliquam ea temporibus maxime, nam autem libero fuga nemo ullam totam
-        exercitationem dolorem beatae. Deleniti debitis obcaecati fugiat,
-        praesentium soluta, unde possimus tempora asperiores voluptatibus iure
-        itaque? Molestiae provident sint quae officia fugit quibusdam eos magni,
-        totam vel nulla id dolorum repellat et alias!
-      </Typography>
+      <Box ref={paragraphRef} width="75%"></Box>
     </Stack>
   );
 };

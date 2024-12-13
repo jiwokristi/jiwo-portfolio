@@ -1,8 +1,13 @@
 {
   "HEAD": {
     "title": {
-      "intro": "Jiwo Kristi | Introduction"
+      "intro": "Introduction"
     }
   },
-  "texterify_timestamp": "2024-11-13T04:48:39Z"
+  "HOME": {
+    "intro": {
+      "paragraph": "Merging design and code to craft standout, creative solutions. Together, we’ll create digital experiences that lead, not follow. Always bold, always forward-thinking."
+    }
+  },
+  "texterify_timestamp": "2024-12-13T07:14:33Z"
 }

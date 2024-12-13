@@ -18,8 +18,8 @@ i18n.use(initReactI18next).init({
       translation: idTranslation,
     },
   },
-  lng: Locales.ID, // Default language.
-  fallbackLng: Locales.ID,
+  lng: Locales.EN, // Default language.
+  fallbackLng: Locales.EN,
   interpolation: {
     escapeValue: false,
   },

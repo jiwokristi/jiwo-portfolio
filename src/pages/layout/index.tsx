@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router-dom";
 import { Box, Stack, Typography } from "@mui/material";
+import gsap from "gsap";
 
 import { Locales } from "@/utils/localization/i18n";
 
@@ -8,6 +10,25 @@ import { TextEffect } from "@/components/TextEffect";
 
 const Navbar = () => {
   const { i18n } = useTranslation();
+
+  useEffect(() => {
+    const tween = gsap.to("#Navbar", {
+      yPercent: -100,
+      y: 0,
+      ease: "power1.inOut",
+      scrollTrigger: {
+        id: "Navbar",
+        trigger: "body",
+        start: "top -20%",
+        end: "top -20%",
+        toggleActions: "play none reverse none",
+      },
+    });
+
+    return () => {
+      tween.kill();
+    };
+  }, []);
 
   return (
     <Box

@@ -1,8 +1,13 @@
 {
   "HEAD": {
     "title": {
-      "intro": "Jiwo Kristi | Perkenalan"
+      "intro": "Pendahuluan"
     }
   },
-  "texterify_timestamp": "2024-11-13T04:48:39Z"
+  "HOME": {
+    "intro": {
+      "paragraph": "Menggabungkan desain dan kode untuk menciptakan solusi kreatif yang menonjol. Bersama-sama, kita akan menciptakan pengalaman digital yang memimpin, bukan sekadar mengikuti. Selalu berani, selalu berpikir ke depan."
+    }
+  },
+  "texterify_timestamp": "2024-12-13T07:14:33Z"
 }

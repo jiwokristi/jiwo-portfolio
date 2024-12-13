@@ -53,8 +53,14 @@ export const Hero = () => {
       start: "top top",
       end: "bottom top",
       onUpdate: self => {
-        tween.timeScale(self.direction === 1 ? 1 : -1);
-        console.log("self", self);
+        const scrollVelocity = self.getVelocity();
+        const baseSpeed = 1;
+        const boostFactor = 0.005;
+
+        const adjustedSpeed =
+          baseSpeed + Math.abs(scrollVelocity) * boostFactor;
+
+        tween.timeScale(self.direction === 1 ? adjustedSpeed : -adjustedSpeed);
       },
     });
 

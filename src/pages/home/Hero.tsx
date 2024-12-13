@@ -100,7 +100,6 @@ export const Hero = () => {
               gsap.to(window, {
                 scrollTo: { y: "#" + SectionKeys.HOME_INTRO, autoKill: false },
                 ease: "power2.inOut",
-                // duration: 1,
               });
             }}
             sx={{ cursor: "pointer" }}

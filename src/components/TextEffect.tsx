@@ -20,7 +20,7 @@ export const TextEffect = ({
         {...props}
         position="relative"
         sx={{
-          transition: "all 0.15s ease-in-out",
+          transition: "all 0.2s ease-in-out",
 
           "::before": {
             content: `'${textContent}'`,
@@ -32,7 +32,7 @@ export const TextEffect = ({
             textAlign: "inherit",
             fontWeight: "inherit",
             transform: "translateY(100%)",
-            transition: "all 0.15s ease-in-out",
+            transition: "all 0.2s ease-in-out",
             ...beforeSx,
           },
           ":hover": {

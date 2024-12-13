@@ -91,10 +91,19 @@ export const Hero = () => {
           })}
         >
           <TextEffect
+            role="link"
             component="span"
             variant="subtitle1"
             color="common.white"
             textContent={t("HOME.hero.nav.intro")}
+            onClick={() => {
+              gsap.to(window, {
+                scrollTo: { y: "#" + SectionKeys.HOME_INTRO, autoKill: false },
+                ease: "power2.inOut",
+                // duration: 1,
+              });
+            }}
+            sx={{ cursor: "pointer" }}
             containerProps={{
               id: SectionKeys.HOME_HERO + "-nav-list__intro",
               component: "li",

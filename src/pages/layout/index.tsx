@@ -143,6 +143,9 @@ const Topbar = () => {
           </Stack>
           <Button
             id="Topbar-downloadCv"
+            component="a"
+            href="/pdf/Jiwo Kristi-resume.pdf"
+            download
             variant="outlined"
             sx={{
               flex: "1",

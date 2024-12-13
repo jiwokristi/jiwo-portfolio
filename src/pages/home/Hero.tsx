@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Box, Stack, Typography } from "@mui/material";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -8,37 +9,14 @@ import { SectionKeys } from "@/utils/constants/section-keys";
 import { TextEffect } from "@/components/TextEffect";
 
 export const Hero = () => {
-  const [time, setTime] = useState(
-    new Intl.DateTimeFormat("en-ID", {
-      // Denpasar is in the "Asia/Makassar" timezone.
-      timeZone: "Asia/Makassar",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-    }).format(new Date()),
-  );
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const currentTime = new Intl.DateTimeFormat("en-ID", {
-        timeZone: "Asia/Makassar",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-      }).format(new Date());
-
-      setTime(currentTime);
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
+  const { t } = useTranslation();
 
   useEffect(() => {
     function infiniteReverse(this: GSAPTween) {
       this.totalTime(this.rawTime() + this.duration() + this.repeatDelay());
     }
 
-    const tween = gsap.to(".scroller__inner", {
+    const tween = gsap.to(`.${SectionKeys.HOME_HERO}-marquee__inner`, {
       xPercent: -50,
       x: -175,
       duration: 15,
@@ -75,8 +53,7 @@ export const Hero = () => {
       id={SectionKeys.HOME_HERO}
       component="section"
       justifyContent="space-between"
-      pt="8.8rem"
-      pb="3.2rem"
+      pt="14rem"
       height="100vh"
       sx={{
         backgroundImage: "url('/img/home/jiwo.jpg')",
@@ -95,53 +72,65 @@ export const Hero = () => {
           bottom: 0,
 
           bgcolor: "common.black",
-          opacity: 0.5,
+          opacity: 0.6,
         },
       }}
     >
-      <Stack
-        id="Home-Hero-info"
-        gap="0.4rem"
-        px="3.2rem"
-        zIndex={1}
-        sx={({ breakpoints }) => ({
-          [breakpoints.up("sm")]: {
-            flexDirection: "row",
-            justifyContent: "space-between",
-          },
-        })}
-      >
-        <TextEffect
-          component="span"
-          fontStyle="italic"
-          variant="subtitle1"
-          color="common.white"
-          textContent="Full Stack Developer"
-          containerProps={{ id: "Home-Hero-info__jobTitle" }}
-        />
-        <TextEffect
-          component="span"
-          variant="subtitle1"
-          color="common.white"
-          textContent="Denpasar, Indonesia"
-          containerProps={{ id: "Home-Hero-info__location" }}
-        />
-        <TextEffect
-          component="span"
-          width="19rem"
-          variant="subtitle1"
-          color="common.white"
-          textAlign="right"
-          textContent={time + " (UTC+8)"}
-          containerProps={{ id: "Home-Hero-info__currentTime" }}
-        />
-      </Stack>
+      <Box id={SectionKeys.HOME_HERO + "-nav"} component="nav">
+        <Stack
+          id={SectionKeys.HOME_HERO + "-nav-list"}
+          component="ul"
+          gap="0.4rem"
+          px="3.2rem"
+          zIndex={1}
+          sx={({ breakpoints }) => ({
+            [breakpoints.up("sm")]: {
+              flexDirection: "row",
+              justifyContent: "space-between",
+            },
+          })}
+        >
+          <TextEffect
+            component="span"
+            variant="subtitle1"
+            color="common.white"
+            textContent={t("HOME.hero.nav.intro")}
+            containerProps={{
+              id: SectionKeys.HOME_HERO + "-nav-list__intro",
+              component: "li",
+              width: "23rem",
+            }}
+          />
+          <TextEffect
+            component="span"
+            variant="subtitle1"
+            color="common.white"
+            textContent={t("HOME.hero.nav.work")}
+            containerProps={{
+              id: SectionKeys.HOME_HERO + "-nav-list__work",
+              component: "li",
+              width: "23rem",
+            }}
+          />
+          <TextEffect
+            component="span"
+            variant="subtitle1"
+            color="common.white"
+            textContent={t("HOME.hero.nav.contact")}
+            containerProps={{
+              id: SectionKeys.HOME_HERO + "-nav-list__contact",
+              component: "li",
+              width: "23rem",
+            }}
+          />
+        </Stack>
+      </Box>
       <Box component="header" zIndex={1}>
         <Stack
           flexDirection="row"
           gap="35rem"
           maxWidth="100%"
-          className="scroller"
+          className={SectionKeys.HOME_HERO + "-marquee"}
           overflow="hidden"
         >
           {[...Array(2)].map((_, i) => (
@@ -151,7 +140,7 @@ export const Hero = () => {
               flexDirection="row"
               gap="35rem"
               width="max-content"
-              className="scroller__inner"
+              className={SectionKeys.HOME_HERO + "-marquee__inner"}
             >
               {[...Array(2)].map((_, idx) => (
                 <Typography

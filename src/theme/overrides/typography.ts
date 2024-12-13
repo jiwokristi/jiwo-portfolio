@@ -4,7 +4,7 @@ export const typographyOverrides: ThemeOptions["typography"] = palette => ({
   fontFamily: "Poppins, sans-serif",
   fontWeightBold: 700,
   allVariants: {
-    color: palette.common.black,
+    color: palette.grey["900"],
   },
   h1: {
     fontWeight: 500,
@@ -16,6 +16,6 @@ export const typographyOverrides: ThemeOptions["typography"] = palette => ({
   },
   subtitle1: {
     fontWeight: 500,
-    fontSize: "2rem",
+    fontSize: "1.6rem",
   },
 });

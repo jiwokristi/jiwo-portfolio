@@ -1,18 +1,43 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router-dom";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import gsap from "gsap";
 
 import { Locales } from "@/utils/localization/i18n";
 
 import { TextEffect } from "@/components/TextEffect";
 
-const Navbar = () => {
-  const { i18n } = useTranslation();
+const Topbar = () => {
+  const { t, i18n } = useTranslation();
+
+  const [time, setTime] = useState(
+    new Intl.DateTimeFormat("en-ID", {
+      // Denpasar is in the "Asia/Makassar" timezone.
+      timeZone: "Asia/Makassar",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    }).format(new Date()),
+  );
 
   useEffect(() => {
-    const tween = gsap.to("#Navbar", {
+    const interval = setInterval(() => {
+      const currentTime = new Intl.DateTimeFormat("en-ID", {
+        timeZone: "Asia/Makassar",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      }).format(new Date());
+
+      setTime(currentTime);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const tween = gsap.to("#Topbar", {
       yPercent: -100,
       y: 0,
       ease: "power1.inOut",
@@ -32,8 +57,7 @@ const Navbar = () => {
 
   return (
     <Box
-      id="Navbar"
-      component="nav"
+      id="Topbar"
       position="fixed"
       top={0}
       left={0}
@@ -42,51 +66,97 @@ const Navbar = () => {
       zIndex={9999}
     >
       <Stack
-        id="Navbar-listContainer"
-        component="ul"
         flexDirection="row"
         alignItems="center"
-        justifyContent="flex-end"
-        gap="0.8rem"
+        justifyContent="space-between"
       >
-        <Stack component="li" overflow="hidden" className="Navbar-listItem">
-          <TextEffect
-            id="Navbar-listItem-language-id"
-            component="span"
-            role="button"
-            onClick={() => i18n.changeLanguage(Locales.ID)}
-            textContent="ID"
-            fontSize="1.6rem"
-            color="common.white"
+        <TextEffect
+          component="span"
+          variant="subtitle1"
+          color="common.white"
+          textContent="Denpasar, Indonesia"
+          containerProps={{ id: "Topbar-location", width: "23rem" }}
+        />
+        <TextEffect
+          component="span"
+          variant="subtitle1"
+          color="common.white"
+          textContent={time + " (UTC+8)"}
+          containerProps={{ id: "Topbar-localTime", width: "23rem" }}
+        />
+        {/* ----- LANGUAGE PICKER & DOWNLOAD CV ----- */}
+        <Stack
+          flexDirection="row"
+          alignItems="center"
+          gap="1.6rem"
+          width="23rem"
+        >
+          <Stack
+            id="Topbar-languagePicker"
+            flexDirection="row"
+            alignItems="center"
+            gap="0.8rem"
+          >
+            <TextEffect
+              component="span"
+              role="button"
+              onClick={() => i18n.changeLanguage(Locales.ID)}
+              variant="subtitle1"
+              color="common.white"
+              textContent="ID"
+              sx={{
+                fontWeight: i18n.language === Locales.ID ? 700 : 500,
+                cursor: "pointer",
+              }}
+              containerProps={{
+                overflow: "hidden",
+                className: "Topbar-languagePicker-id",
+              }}
+            >
+              ID
+            </TextEffect>
+            <Typography
+              component="span"
+              variant="subtitle1"
+              color="common.white"
+            >
+              /
+            </Typography>
+            <TextEffect
+              component="span"
+              role="button"
+              onClick={() => i18n.changeLanguage(Locales.EN)}
+              variant="subtitle1"
+              color="common.white"
+              textContent="EN"
+              sx={{
+                fontWeight: i18n.language === Locales.EN ? 700 : 500,
+                cursor: "pointer",
+              }}
+              containerProps={{
+                overflow: "hidden",
+                className: "Topbar-languagePicker-en",
+              }}
+            >
+              EN
+            </TextEffect>
+          </Stack>
+          <Button
+            id="Topbar-downloadCv"
+            variant="outlined"
             sx={{
-              fontWeight: i18n.language === Locales.ID ? 700 : 500,
-              cursor: "pointer",
+              flex: "1",
+              border: theme => `1px solid ${theme.palette.common.white}`,
+              borderRadius: 0,
             }}
           >
-            ID
-          </TextEffect>
-        </Stack>
-        <Stack component="li" overflow="hidden" className="Navbar-listItem">
-          <Typography component="span" fontSize="1.6rem" color="common.white">
-            /
-          </Typography>
-        </Stack>
-        <Stack component="li" overflow="hidden" className="Navbar-listItem">
-          <TextEffect
-            id="Navbar-listItem-language-en"
-            component="span"
-            role="button"
-            onClick={() => i18n.changeLanguage(Locales.EN)}
-            textContent="EN"
-            fontSize="1.6rem"
-            color="common.white"
-            sx={{
-              fontWeight: i18n.language === Locales.EN ? 700 : 500,
-              cursor: "pointer",
-            }}
-          >
-            EN
-          </TextEffect>
+            <TextEffect
+              component="span"
+              textContent={t("TOPBAR.download-cv")}
+              variant="subtitle1"
+              color="common.white"
+            />
+          </Button>
         </Stack>
       </Stack>
     </Box>
@@ -96,7 +166,7 @@ const Navbar = () => {
 export const RootLayout = () => {
   return (
     <>
-      <Navbar />
+      <Topbar />
       <Outlet />
     </>
   );

@@ -1,13 +1,26 @@
 {
   "HEAD": {
     "title": {
-      "intro": "Pendahuluan"
+      "contact": "Kontak",
+      "intro": "Pengantar",
+      "work": "Pekerjaan"
     }
   },
   "HOME": {
+    "hero": {
+      "nav": {
+        "contact": "Kontak",
+        "intro": "Pengantar",
+        "work": "Pekerjaan"
+      }
+    },
     "intro": {
+      "heading": "Pengantar",
       "paragraph": "Menggabungkan desain dan kode untuk menciptakan solusi kreatif yang menonjol. Bersama-sama, kita akan menciptakan pengalaman digital yang memimpin, bukan sekadar mengikuti. Selalu berani, selalu berpikir ke depan."
     }
   },
-  "texterify_timestamp": "2024-12-13T07:14:33Z"
+  "TOPBAR": {
+    "download-cv": "Unduh CV"
+  },
+  "texterify_timestamp": "2024-12-13T10:28:16Z"
 }

@@ -8,7 +8,7 @@ export const cssBaselineOverrides: ThemeOptions["components"] = {
       },
       body: {
         backgroundColor: palette.common.white,
-        color: palette.common.black,
+        color: palette.grey["900"],
         userSelect: "none",
 
         "::-webkit-scrollbar": {

@@ -24,7 +24,7 @@ export const Home = () => {
               title = name;
               break;
             case SectionKeys.HOME_INTRO:
-              title = name + " " + t("HEAD.title.intro");
+              title = name + " | " + t("HEAD.title.intro");
               break;
 
             default:

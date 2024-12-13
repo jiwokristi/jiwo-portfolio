@@ -1,32 +1,41 @@
 # Hero
 
-### 1. "Jiwo Kristi" marquee
+### 1. "Jiwo Kristi" marquee **(DONE)**
 
 The marquee should go to the left if the user is scrolling down, and reverse if the user is scrolling up. **(DONE)**
 
 The speed of the marquee should also be affected by the scroll velocity. **(DONE)**
 
-### 2. Job title, location, local time (DONE)
+### 2. Navigation
 
-### 3. Navbar
+- Intro **(DONE)**
+- Work
+- Contact
+
+### 3. Topbar (DONE)
 
 Consists of:
 
-- Projects
-- Experience
+- Location **(DONE)**
+- Local time **(DONE)**
 - Language picker **(DONE)**
-- Download CV
+- Download CV **(DONE)**
 
-The navbar should be hidden after the user scrolls down for a bit.
+The navbar should be hidden after the user scrolls down for a bit. **(DONE)**
 
 ### 4. Floating hamburger menu
 
 Consists of:
 
-- Projects
-- Experience
+- Location
+- Local time
 - Language picker
 - Download CV
+- Intro
+- Work
+- Contact
+- LinkedIn
+- GitHub
 
 Should appear after the navbar is hidden.
 

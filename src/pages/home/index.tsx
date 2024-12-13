@@ -17,17 +17,18 @@ export const Home = () => {
         if (entry.isIntersecting) {
           const sectionId = entry.target.id;
           let title: string | undefined;
+          const name = "Jiwo Kristi";
 
           switch (sectionId) {
             case SectionKeys.HOME_HERO:
-              title = "Jiwo Kristi";
+              title = name;
               break;
             case SectionKeys.HOME_INTRO:
-              title = t("HEAD.title.intro");
+              title = name + " " + t("HEAD.title.intro");
               break;
 
             default:
-              title = "Jiwo Kristi";
+              title = name;
               break;
           }
 

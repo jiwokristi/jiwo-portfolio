@@ -62,7 +62,7 @@ const Sidebar = () => {
                 x: 0,
                 ease: "power2.inOut",
                 onComplete: () => {
-                  if (p && window.scrollY === 0) {
+                  if (p && window.scrollY <= 100) {
                     gsap.to("#Hamburger-container", {
                       scale: 0,
                       ease: "power4.inOut",

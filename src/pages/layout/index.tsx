@@ -1,12 +1,96 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router-dom";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { Locales } from "@/utils/localization/i18n";
 
 import { TextEffect } from "@/components/TextEffect";
+import { Hamburger } from "@/components/Hamburger";
+
+const Sidebar = () => {
+  const [open, setOpen] = useState(false);
+
+  const growHandler = useCallback(
+    function growHandler(type: "onEnter" | "onEnterBack") {
+      gsap.to("#Hamburger-container", {
+        scale: open
+          ? 1
+          : type === "onEnterBack" || window.scrollY === 0
+            ? 0
+            : 1,
+        ease: "power4.inOut",
+      });
+    },
+    [open],
+  );
+
+  useEffect(() => {
+    const scrollTrigger = ScrollTrigger.create({
+      id: "Hamburger-container",
+      trigger: "body",
+      start: "top -25%",
+      end: "top -25%",
+      onEnter: () => growHandler("onEnter"),
+      onEnterBack: () => growHandler("onEnterBack"),
+    });
+
+    return () => {
+      scrollTrigger.kill();
+    };
+  }, [growHandler]);
+
+  return createPortal(
+    <>
+      <Box
+        id="Hamburger-container"
+        position="fixed"
+        top="3.2rem"
+        right="3.2rem"
+        zIndex={10000}
+        sx={{ transform: "scale(0)" }}
+      >
+        <Hamburger
+          open={open}
+          onClick={() => {
+            setOpen(p => {
+              gsap.to("#Sidebar", {
+                xPercent: p ? 100 : 0,
+                x: 0,
+                ease: "power2.inOut",
+                onComplete: () => {
+                  if (p && window.scrollY === 0) {
+                    gsap.to("#Hamburger-container", {
+                      scale: 0,
+                      ease: "power4.inOut",
+                    });
+                  }
+                },
+              });
+
+              return !p;
+            });
+          }}
+        />
+      </Box>
+      <Stack
+        id="Sidebar"
+        position="fixed"
+        top={0}
+        right={0}
+        zIndex={9999}
+        width="50vw"
+        height="100vh"
+        bgcolor="grey.900"
+        sx={{ transform: "translateX(100%)" }}
+      ></Stack>
+    </>,
+    document.querySelector("#portal")!,
+  );
+};
 
 const Topbar = () => {
   const { t, i18n } = useTranslation();
@@ -42,7 +126,7 @@ const Topbar = () => {
       y: 0,
       ease: "power1.inOut",
       scrollTrigger: {
-        id: "Navbar",
+        id: "Topbar",
         trigger: "body",
         start: "top -20%",
         end: "top -20%",
@@ -170,6 +254,7 @@ export const RootLayout = () => {
   return (
     <>
       <Topbar />
+      <Sidebar />
       <Outlet />
     </>
   );

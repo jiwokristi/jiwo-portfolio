@@ -1,10 +1,12 @@
-import { CSSProperties } from "react";
+import { CSSProperties, HTMLAttributeAnchorTarget } from "react";
 import { Stack, StackProps, Typography, TypographyProps } from "@mui/material";
 
 interface TextEffectProps extends TypographyProps {
   beforeSx?: CSSProperties;
   textContent: string;
   containerProps?: StackProps;
+  target?: HTMLAttributeAnchorTarget;
+  href?: string;
 }
 
 export const TextEffect = ({

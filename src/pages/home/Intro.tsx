@@ -78,11 +78,13 @@ export const Intro = () => {
       bgcolor="common.white"
     >
       <TextEffect
-        id={SectionKeys.HOME_INTRO + "-heading"}
         variant="h2"
         lineHeight={1.22}
         textContent={t("HOME.intro.heading")}
-        containerProps={{ component: "header" }}
+        containerProps={{
+          component: "header",
+          id: SectionKeys.HOME_INTRO + "-header",
+        }}
       />
       <Box
         id={SectionKeys.HOME_INTRO + "-content"}

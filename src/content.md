@@ -27,17 +27,17 @@ The navbar should be hidden after the user scrolls down for a bit. **(DONE)**
 
 Consists of:
 
-- Location
-- Local time
-- Language picker
-- Download CV
-- Intro
+- Location **(DONE)**
+- Local time **(DONE)**
+- Language picker **(DONE)**
+- Download CV **(DONE)**
+- Intro **(DONE)**
 - Work
 - Contact
-- LinkedIn
-- GitHub
+- LinkedIn **(DONE)**
+- GitHub **(DONE)**
 
-Should appear after the navbar is hidden.
+Should appear after the navbar is hidden. **(DONE)**
 
 # Intro
 

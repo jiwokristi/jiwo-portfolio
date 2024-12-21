@@ -33,7 +33,7 @@ export const Hamburger = ({ open, sx, ...props }: HamburgerProps) => {
         top="50%"
         left="50%"
         width="3.2rem"
-        height="0.25rem"
+        height="0.15rem"
         bgcolor="grey.900"
         borderRadius={9999}
         sx={{
@@ -49,10 +49,10 @@ export const Hamburger = ({ open, sx, ...props }: HamburgerProps) => {
         top="50%"
         left="50%"
         width="3.2rem"
-        height="0.25rem"
-        bgcolor="grey.900"
+        height="0.15rem"
         borderRadius={9999}
         sx={{
+          bgcolor: open ? "grey.900" : "grey.600",
           transform: open
             ? "translate(-50%, -50%) rotate(-45deg)"
             : "translate(-50%, calc(-50% + 0.4rem))",
@@ -60,22 +60,6 @@ export const Hamburger = ({ open, sx, ...props }: HamburgerProps) => {
         }}
         className="btn__Hamburger-BurgerLine"
       />
-      {/* <BurgerLine
-        sx={{
-        	transform: open
-        		? "rotate(45deg)" // Less translateY for a balanced X
-        		: "translateY(-0.9rem) rotate(0deg)", // Adjusted position
-        }}
-        className="btn__Hamburger-BurgerLine"
-      />
-      <BurgerLine
-        sx={{
-        	transform: open
-        		? "rotate(-45deg) " // Less translateY for symmetry
-        		: "translateY(0.9rem) rotate(0deg)", // Adjusted position
-        }}
-        className="btn__Hamburger-BurgerLine"
-      /> */}
     </IconButton>
   );
 };

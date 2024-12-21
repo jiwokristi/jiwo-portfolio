@@ -1,4 +1,11 @@
 {
+  "COMMON": {
+    "language": "Bahasa",
+    "local-time": "Waktu Lokal",
+    "location": "Lokasi",
+    "navigation": "Navigasi",
+    "socials": "Sosial"
+  },
   "HEAD": {
     "title": {
       "contact": "Kontak",
@@ -7,20 +14,18 @@
     }
   },
   "HOME": {
-    "hero": {
-      "nav": {
-        "contact": "Kontak",
-        "intro": "Pengantar",
-        "work": "Pekerjaan"
-      }
-    },
     "intro": {
       "heading": "Pengantar",
       "paragraph": "Menggabungkan desain dan kode untuk menciptakan solusi kreatif yang menonjol. Bersama-sama, kita akan menciptakan pengalaman digital yang memimpin, bukan sekadar mengikuti. Selalu berani, selalu berpikir ke depan."
     }
   },
+  "NAVIGATION": {
+    "contact": "Kontak",
+    "intro": "Pengantar",
+    "work": "Pekerjaan"
+  },
   "TOPBAR": {
     "download-cv": "Unduh CV"
   },
-  "texterify_timestamp": "2024-12-13T10:28:16Z"
+  "texterify_timestamp": "2024-12-21T04:43:54Z"
 }

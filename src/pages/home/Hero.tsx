@@ -95,7 +95,7 @@ export const Hero = () => {
             component="span"
             variant="subtitle1"
             color="common.white"
-            textContent={t("HOME.hero.nav.intro")}
+            textContent={t("NAVIGATION.intro")}
             onClick={() => {
               gsap.to(window, {
                 scrollTo: { y: "#" + SectionKeys.HOME_INTRO, autoKill: false },
@@ -113,7 +113,7 @@ export const Hero = () => {
             component="span"
             variant="subtitle1"
             color="common.white"
-            textContent={t("HOME.hero.nav.work")}
+            textContent={t("NAVIGATION.work")}
             containerProps={{
               id: SectionKeys.HOME_HERO + "-nav-list__work",
               component: "li",
@@ -124,7 +124,7 @@ export const Hero = () => {
             component="span"
             variant="subtitle1"
             color="common.white"
-            textContent={t("HOME.hero.nav.contact")}
+            textContent={t("NAVIGATION.contact")}
             containerProps={{
               id: SectionKeys.HOME_HERO + "-nav-list__contact",
               component: "li",
@@ -133,7 +133,7 @@ export const Hero = () => {
           />
         </Stack>
       </Box>
-      <Box component="header" zIndex={1}>
+      <Box id={SectionKeys.HOME_HERO + "-header"} component="header" zIndex={1}>
         <Stack
           flexDirection="row"
           gap="35rem"
